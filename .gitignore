@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Data files (generated at runtime)
+data/*.db
+data/*.json
+!data/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Distribution
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Old project files (can be removed after migration)
+*.dat
