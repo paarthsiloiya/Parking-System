@@ -2,10 +2,7 @@
 
 > A desktop vehicle parking management system built with **Python** and **CustomTkinter**.
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
-[![UI: CustomTkinter](https://img.shields.io/badge/UI-CustomTkinter-green)](https://github.com/TomSchimansky/CustomTkinter)
-[![DB: SQLite](https://img.shields.io/badge/DB-SQLite-lightgrey)](https://www.sqlite.org/)
-[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-informational)](https://paarthsiloiya.github.io/Parking-System/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/) [![UI: CustomTkinter](https://img.shields.io/badge/UI-CustomTkinter-green)](https://github.com/TomSchimansky/CustomTkinter) [![DB: SQLite](https://img.shields.io/badge/DB-SQLite-lightgrey)](https://www.sqlite.org/) [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-informational)](https://paarthsiloiya.github.io/Parking-System/)
 
 ---
 
@@ -120,53 +117,6 @@ It includes:
 pip install sphinx shibuya
 sphinx-build -b html docs/ docs/_build/html
 # Open docs/_build/html/index.html
-```
-
----
-
-## 🗂️ Project Structure
-
-```
-Parking-System/
-├── run.py                  # Entry point
-├── requirements.txt        # Runtime dependencies
-├── docs/                   # Sphinx documentation source
-│   ├── conf.py
-│   ├── index.rst
-│   ├── setup.rst
-│   ├── usage.rst
-│   ├── architecture.rst
-│   └── api/
-│       └── index.rst
-├── .github/
-│   └── workflows/
-│       └── docs.yml        # GitHub Actions — build & deploy docs
-├── assets/
-│   └── icons/              # UI icons (PNG)
-├── data/                   # Auto-created on first run
-│   ├── parking.db
-│   ├── settings.json
-│   ├── credentials.json
-│   └── vehicle_options.json
-└── src/
-    ├── app.py              # ParkingApp coordinator + ParkingWindow
-    ├── config.py           # Path constants, JSON helpers
-    ├── database.py         # SQLite Database class
-    └── screens/
-        ├── base.py
-        ├── entry.py
-        ├── exit_screen.py
-        ├── bill.py
-        ├── owner.py
-        ├── credentials.py
-        ├── records.py
-        ├── delete_records.py
-        ├── income.py
-        ├── pricing.py
-        ├── slots.py
-        ├── floor_allot.py
-        ├── vehicle_options.py
-        └── settings_screen.py
 ```
 
 ---

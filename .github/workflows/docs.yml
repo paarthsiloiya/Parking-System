@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main          # deploy on every push to main
+      - master        # or master
     paths:
       - "docs/**"
       - "src/**"
