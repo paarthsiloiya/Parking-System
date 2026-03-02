@@ -79,8 +79,14 @@ class SlotsScreen(BaseScreen):
 
         self._show_status()
 
+    def refresh(self):
+        """Rebuild the screen when notified of a database change (e.g. a new
+        vehicle entry or exit changes slot occupancy)."""
+        self.app.show_screen(SlotsScreen)
+
     def _show_status(self):
         """Render the slot-status visualisation (O = Open, X = Occupied)."""
+
         customtkinter.CTkLabel(
             self, text="Slot Status (O = Open, X = Occupied)",
             font=self.get_font(size_offset=1, weight="bold"),
@@ -144,8 +150,9 @@ class SlotsScreen(BaseScreen):
             for i in range(nf):
                 self.db.set_floor_vehicle_types(chr(65 + i), opts)
             self.show_info("Success",
-                           f"Created {nf} floor(s) × {ns} slot(s).")
-            self.app.show_screen(SlotsScreen)  # refresh
+                           f"Created {nf} floor(s) \u00d7 {ns} slot(s).")
+            self.app.broadcast_refresh()  # notify Entry window of new slots
+            self.app.show_screen(SlotsScreen)  # rebuild this screen
         except Exception as exc:
             self.show_error("Error", str(exc))
 

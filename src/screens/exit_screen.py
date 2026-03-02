@@ -16,11 +16,6 @@ class ExitScreen(BaseScreen):
 
     def _create_widgets(self):
         """Lay out the exit form — vehicle number input and submit button."""
-        from src.screens.main_menu import MainMenu
-
-        back = self.create_back_button(self, MainMenu)
-        back.pack(anchor="nw", padx=10, pady=10)
-
         customtkinter.CTkLabel(
             self, text="Vehicle Exit",
             font=self.get_font(size_offset=8, weight="bold"),
@@ -72,6 +67,9 @@ class ExitScreen(BaseScreen):
                 from src.screens.bill import BillDialog
                 BillDialog(self, bill_data, self.app)
                 self.car_no.set("")
+                # Notify Entry and Admin windows so the freed slot is visible
+                # immediately.
+                self.app.broadcast_refresh()
             else:
                 self.show_error("Error", "Failed to process vehicle exit.")
         except Exception as exc:

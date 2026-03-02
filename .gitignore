@@ -36,5 +36,8 @@ build/
 *.egg-info/
 *.egg
 
+# Sphinx documentation build output
+docs/_build/
+
 # Old project files (can be removed after migration)
 *.dat

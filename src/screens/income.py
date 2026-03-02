@@ -58,6 +58,10 @@ class IncomeScreen(BaseScreen):
         )
         self.amount_label.pack(pady=30)
 
+    def refresh(self):
+        """Recalculate income when notified of a database change."""
+        self._calculate()
+
     def _calculate(self):
         """Query income for the selected date range and display it."""
         from_date = self.from_cal.get_date().strftime("%Y-%m-%d 00:00:00")

@@ -18,9 +18,9 @@ class SettingsScreen(BaseScreen):
 
     def _create_widgets(self):
         """Lay out font, theme, and accent fields with a save button."""
-        from src.screens.main_menu import MainMenu
+        from src.screens.owner import OwnerMenu
 
-        back = self.create_back_button(self, MainMenu)
+        back = self.create_back_button(self, OwnerMenu)
         back.pack(anchor="nw", padx=10, pady=10)
 
         customtkinter.CTkLabel(

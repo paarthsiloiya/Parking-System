@@ -56,6 +56,10 @@ class RecordsScreen(BaseScreen):
         )
         self.text.pack(fill="both", expand=True, padx=10, pady=10)
 
+    def refresh(self):
+        """Re-fetch records when notified of a database change."""
+        self._fetch()
+
     def _fetch(self):
         """Query records for the selected date range and display them."""
         from_date = self.from_cal.get_date().strftime("%Y-%m-%d 00:00:00")

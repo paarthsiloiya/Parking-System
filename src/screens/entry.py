@@ -19,11 +19,6 @@ class EntryScreen(BaseScreen):
 
     def _create_widgets(self):
         """Lay out the entry form — vehicle number, type, and submit button."""
-        from src.screens.main_menu import MainMenu
-
-        back = self.create_back_button(self, MainMenu)
-        back.pack(anchor="nw", padx=10, pady=10)
-
         customtkinter.CTkLabel(
             self, text="Vehicle Entry",
             font=self.get_font(size_offset=8, weight="bold"),
@@ -105,5 +100,8 @@ class EntryScreen(BaseScreen):
             )
             self.car_no.set("")
             self.vehicle_type.set("Select Vehicle Type")
+            # Notify the Exit and Admin windows so they see the new record
+            # immediately without the operator having to refresh manually.
+            self.app.broadcast_refresh()
         except Exception as exc:
             self.show_error("Error", f"Failed to register vehicle:\n{exc}")

@@ -129,6 +129,7 @@ class DeleteRecordsScreen(BaseScreen):
             try:
                 self.db.delete_all_records()
                 self.show_info("Done", "All records deleted.")
+                self.app.broadcast_refresh()
             except Exception as exc:
                 self.show_error("Error", str(exc))
 
@@ -142,6 +143,7 @@ class DeleteRecordsScreen(BaseScreen):
             try:
                 self.db.delete_records_by_date(f, t)
                 self.show_info("Done", "Records deleted.")
+                self.app.broadcast_refresh()
             except Exception as exc:
                 self.show_error("Error", str(exc))
 
@@ -156,5 +158,6 @@ class DeleteRecordsScreen(BaseScreen):
                 self.db.delete_records_by_car(car)
                 self.show_info("Done", f"Records for {car} deleted.")
                 self.del_car.set("")
+                self.app.broadcast_refresh()
             except Exception as exc:
                 self.show_error("Error", str(exc))

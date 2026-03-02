@@ -15,11 +15,6 @@ class OwnerLogin(BaseScreen):
         self._create_widgets()
 
     def _create_widgets(self):
-        from src.screens.main_menu import MainMenu
-
-        back = self.create_back_button(self, MainMenu)
-        back.pack(anchor="nw", padx=10, pady=10)
-
         customtkinter.CTkLabel(
             self, text="Owner Login",
             font=self.get_font(size_offset=8, weight="bold"),
@@ -88,9 +83,8 @@ class OwnerMenu(BaseScreen):
 
     def _create_widgets(self):
         """Create the scrollable list of management buttons."""
-        from src.screens.main_menu import MainMenu
-
-        back = self.create_back_button(self, MainMenu)
+        # Re-lock: navigating back takes the operator to the login screen.
+        back = self.create_back_button(self, OwnerLogin)
         back.pack(anchor="nw", padx=10, pady=10)
 
         customtkinter.CTkLabel(
