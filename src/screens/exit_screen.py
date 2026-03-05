@@ -35,9 +35,13 @@ class ExitScreen(BaseScreen):
         entry = customtkinter.CTkEntry(
             form, textvariable=self.car_no, width=250,
             font=self.get_font(), corner_radius=cr, border_width=bw + 1,
+            placeholder_text="Enter vehicle number"
         )
         entry.grid(row=0, column=1, padx=10, pady=10)
         entry.bind("<Return>", lambda _: self._submit())
+        
+        # Focus on entry by default
+        self.after(100, entry.focus)
 
         icon = self.load_icon("exit.png")
         customtkinter.CTkButton(

@@ -64,9 +64,12 @@ class SettingsScreen(BaseScreen):
                     width=220,
                 ).grid(row=row, column=1, padx=10, pady=8)
             else:
-                customtkinter.CTkEntry(
+                entry = customtkinter.CTkEntry(
                     form, textvariable=var, width=220, font=self.get_font(),
-                ).grid(row=row, column=1, padx=10, pady=8)
+                    placeholder_text=f"Enter {label.lower().replace(':', '')}"
+                )
+                entry.grid(row=row, column=1, padx=10, pady=8)
+                entry.bind("<Return>", lambda _: self._save())
 
         customtkinter.CTkButton(
             form, text="Save Settings",

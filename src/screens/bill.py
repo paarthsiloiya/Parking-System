@@ -66,9 +66,14 @@ class BillDialog(customtkinter.CTkToplevel):
             font=app.get_font(size_offset=6, weight="bold"),
         ).grid(row=0, column=1, padx=15, pady=10, sticky="w")
 
-        customtkinter.CTkButton(
+        close_btn = customtkinter.CTkButton(
             self, text="Close", font=font, command=self.destroy
-        ).pack(pady=15)
+        )
+        close_btn.pack(pady=15)
+        
+        self.bind("<Return>", lambda _: self.destroy())
+        self.bind("<Escape>", lambda _: self.destroy())
 
         self.grab_set()
         self.focus_force()
+        close_btn.focus()

@@ -37,25 +37,37 @@ class CredentialsScreen(BaseScreen):
         bw = self.settings["border_width"]
 
         labels_entries = [
-            ("Current Password:", True),
-            ("New Username:",     False),
-            ("New Password:",     True),
-            ("Confirm Password:", True),
+            ("Current Password:", True, "Enter current password"),
+            ("New Username:",     False, "Enter new username"),
+            ("New Password:",     True, "Enter new password"),
+            ("Confirm Password:", True, "Re-enter new password"),
         ]
 
         self._vars: list[StringVar] = []
-        for row, (label, is_password) in enumerate(labels_entries):
+        self._entries = []
+        for row, (label, is_password, placeholder) in enumerate(labels_entries):
             customtkinter.CTkLabel(
                 form, text=label, font=self.get_font()
             ).grid(row=row, column=0, padx=10, pady=8, sticky="e")
 
             var = StringVar()
             self._vars.append(var)
-            customtkinter.CTkEntry(
+            entry = customtkinter.CTkEntry(
                 form, textvariable=var, width=260,
                 font=self.get_font(), corner_radius=cr, border_width=bw + 1,
                 show="•" if is_password else "",
-            ).grid(row=row, column=1, padx=10, pady=8)
+                placeholder_text=placeholder,
+            )
+            entry.grid(row=row, column=1, padx=10, pady=8)
+            self._entries.append(entry)
+            
+            # Allow Enter key to trigger update on the last field
+            if row == len(labels_entries) - 1:
+                entry.bind("<Return>", lambda _: self._update())
+                
+        # Set focus to the first entry
+        if self._entries:
+            self.after(100, self._entries[0].focus)
 
         customtkinter.CTkLabel(
             form,

@@ -21,6 +21,12 @@ class BaseScreen(customtkinter.CTkFrame):
         super().__init__(parent, fg_color="transparent", **kwargs)
         self.app = app
         self.db = app.db
+        
+        # Unbind Escape by default to prevent leftover bindings from previous screens
+        try:
+            self.winfo_toplevel().unbind("<Escape>")
+        except Exception:
+            pass
 
     @property
     def settings(self) -> dict:
@@ -74,9 +80,14 @@ class BaseScreen(customtkinter.CTkFrame):
 
     def create_back_button(self, parent, target_screen):
         """Return a ← Back button that navigates to *target_screen*."""
+        try:
+            self.winfo_toplevel().bind("<Escape>", lambda e: self.app.show_screen(target_screen))
+        except Exception:
+            pass
+
         return customtkinter.CTkButton(
             parent,
-            text="← Back",
+            text="← Back (Esc)",
             font=self.get_font(),
             width=100,
             fg_color="transparent",

@@ -35,10 +35,16 @@ class EntryScreen(BaseScreen):
         ).grid(row=0, column=0, padx=10, pady=10, sticky="e")
 
         self.car_no = StringVar()
-        customtkinter.CTkEntry(
+        entry_field = customtkinter.CTkEntry(
             form, textvariable=self.car_no, width=250,
             font=self.get_font(), corner_radius=cr, border_width=bw + 1,
-        ).grid(row=0, column=1, padx=10, pady=10)
+            placeholder_text="e.g. MH04AB1234"
+        )
+        entry_field.grid(row=0, column=1, padx=10, pady=10)
+        entry_field.bind("<Return>", lambda _: self._submit())
+        
+        # Focus on entry by default
+        self.after(100, entry_field.focus)
 
         customtkinter.CTkLabel(
             form, text="Vehicle Type:", font=self.get_font()
@@ -54,7 +60,7 @@ class EntryScreen(BaseScreen):
 
         icon = self.load_icon("login.png")
         customtkinter.CTkButton(
-            form, text="Enter Vehicle", image=icon,
+            form, text="Register Vehicle Entry", image=icon,
             font=self.get_font(weight="bold"),
             corner_radius=cr, border_width=bw,
             command=self._submit,

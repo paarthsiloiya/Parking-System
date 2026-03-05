@@ -100,10 +100,12 @@ class DeleteRecordsScreen(BaseScreen):
             inner, text="Vehicle Number:", font=self.get_font()
         ).grid(row=0, column=0, padx=5, pady=5)
         self.del_car = StringVar()
-        customtkinter.CTkEntry(
+        self.del_car_entry = customtkinter.CTkEntry(
             inner, textvariable=self.del_car, width=200,
-            font=self.get_font(),
-        ).grid(row=0, column=1, padx=5, pady=5)
+            font=self.get_font(), placeholder_text="e.g. MH04AB1234"
+        )
+        self.del_car_entry.grid(row=0, column=1, padx=5, pady=5)
+        self.del_car_entry.bind("<Return>", lambda _: self._delete_by_vehicle())
 
         icon = self.load_icon("deleteAll.png")
         customtkinter.CTkButton(
@@ -120,6 +122,10 @@ class DeleteRecordsScreen(BaseScreen):
             f.pack_forget()
         if value in self._frames:
             self._frames[value].pack(fill="both", expand=True)
+            
+            # Automatically focus the relevant field for operability
+            if value == "Delete by Vehicle Number" and hasattr(self, 'del_car_entry'):
+                self.after(50, self.del_car_entry.focus)
 
     def _delete_all(self):
         """Delete all records after confirmation."""

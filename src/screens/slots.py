@@ -45,10 +45,11 @@ class SlotsScreen(BaseScreen):
             grid, text=str(info["floors"]), font=self.get_font()
         ).grid(row=1, column=1, pady=5)
         self.floors_var = StringVar()
-        customtkinter.CTkEntry(
+        floors_entry = customtkinter.CTkEntry(
             grid, textvariable=self.floors_var, width=110,
-            font=self.get_font(),
-        ).grid(row=1, column=2, pady=5)
+            font=self.get_font(), placeholder_text="1-26"
+        )
+        floors_entry.grid(row=1, column=2, pady=5)
 
         customtkinter.CTkLabel(
             grid, text="Slots / Floor:", font=self.get_font()
@@ -57,10 +58,14 @@ class SlotsScreen(BaseScreen):
             grid, text=str(info["slots_per_floor"]), font=self.get_font()
         ).grid(row=2, column=1, pady=5)
         self.slots_var = StringVar()
-        customtkinter.CTkEntry(
+        slots_entry = customtkinter.CTkEntry(
             grid, textvariable=self.slots_var, width=110,
-            font=self.get_font(),
-        ).grid(row=2, column=2, pady=5)
+            font=self.get_font(), placeholder_text="Slots count"
+        )
+        slots_entry.grid(row=2, column=2, pady=5)
+        
+        floors_entry.bind("<Return>", lambda _: slots_entry.focus())
+        slots_entry.bind("<Return>", lambda _: self._update())
 
         btns = customtkinter.CTkFrame(self, fg_color="transparent")
         btns.pack(pady=10)

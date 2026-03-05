@@ -33,6 +33,7 @@ class OwnerLogin(BaseScreen):
         user_entry = customtkinter.CTkEntry(
             form, textvariable=self.username, width=250,
             font=self.get_font(), corner_radius=cr,
+            placeholder_text="Enter username",
         )
         user_entry.grid(row=0, column=1, padx=10, pady=10)
 
@@ -45,6 +46,7 @@ class OwnerLogin(BaseScreen):
         pass_entry = customtkinter.CTkEntry(
             form, textvariable=self.password, width=250,
             font=self.get_font(), show="•", corner_radius=cr,
+            placeholder_text="Enter password",
         )
         pass_entry.grid(row=1, column=1, padx=10, pady=10)
 
@@ -59,6 +61,9 @@ class OwnerLogin(BaseScreen):
 
         user_entry.bind("<Return>", lambda _: pass_entry.focus())
         pass_entry.bind("<Return>", lambda _: self._login())
+        
+        # Focus on username field by default
+        self.after(100, user_entry.focus)
 
     def _login(self):
         """Verify credentials and navigate to the owner menu on success."""
